@@ -1,0 +1,16 @@
+.ads__grid {
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    img {
+      border-radius: 12px;
+      width: 224px;
+    }
+
+    div {
+        padding-inline: 12px;
+    }
+  }
+}
