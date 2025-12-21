@@ -1,16 +1,35 @@
 .ads__grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+
+  @media(width >= 768px) {
+    gap: 20px
+  }
+}
+
+.ads__grid__element {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: fit-content;
+  max-width: 134px;
+
   div {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    padding-inline: 12px;
+  }
 
-    img {
-      border-radius: 12px;
-      width: 224px;
-    }
+  img {
+    border-radius: 12px;
+    width: 100%;
+  }
 
-    div {
-        padding-inline: 12px;
-    }
+  @media (width >= 768px) {
+    max-width: 216px;
+  }
+  @media(width > 1200px) {
+    max-width: 224px;
   }
 }

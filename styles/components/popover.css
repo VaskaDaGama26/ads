@@ -1,0 +1,16 @@
+[popover] {
+  background: white;
+  border-radius: 8px;
+  padding: 32px;
+  width: min(600px, 88%);
+  box-sizing: border-box;
+  height: fit-content;
+  max-height: 75vh;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+[popover]::backdrop {
+    background: rgba(0, 0, 0, 0.426);
+}
