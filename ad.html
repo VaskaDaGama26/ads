@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./assets/styles/style.css" />
     <title>Обьявления - Вариант 5</title>
   </head>
   <body>
@@ -41,7 +41,7 @@
     <main class="ad__main">
       <section class="container ad__section">
         <div half left>
-          <img main src="./images/1.png" alt="" />
+          <img main src="./assets/images/1.png" alt="" />
           <div desktop class="responses">
             <h3>Откликнулись<sup>5</sup></h3>
             <ul class="responses__list">
@@ -63,7 +63,7 @@
           <div class="price__wrapper">
             <h2>3 590 ₽</h2>
             <a href="/" non-mobile class="back__button">
-              <img src="/icons/arrow-back.svg" alt="" />Назад
+              <img src="/assets/icons/arrow-back.svg" alt="" />Назад
             </a>
           </div>
           <p title>Дракон. Рейвен</p>
@@ -71,12 +71,12 @@
             <span phone>8 923 233 21 66</span><span name>Константин</span>
           </p>
           <div class="buttons__wrapper-mobile">
-            <!-- <button class="apply__button">Откликнуться</button> -->
-            <button class="success__button">
-              <img src="/icons/done.svg" alt="" />Вы откликнулись
+            <button class="apply__button">Откликнуться</button>
+            <button class="success__button hidden">
+              <img src="/assets/icons/done.svg" alt="" />Вы откликнулись
             </button>
             <a href="/" mobile class="back__button">
-              <img src="/icons/arrow-back.svg" alt="" />Назад
+              <img src="/assets/icons/arrow-back.svg" alt="" />Назад
             </a>
           </div>
           <p desc desktop>
@@ -134,6 +134,8 @@
       <span> Информация о разработчике </span>
     </footer>
 
-    <script src="/scripts/popover.js"></script>
+    <script src="/assets/scripts/popover.js"></script>
+    <script src="/assets/scripts/validation.js"></script>
+    <script src="/assets/scripts/applyButtonMock.js"></script>
   </body>
 </html>
