@@ -73,12 +73,13 @@
                 <input
                   type="password"
                   id="reg-pass-repeat"
-                  placeholder=" " required
+                  placeholder=" "
+                  required
                 />
                 <label for="auth-email">Повторите пароль</label>
               </div>
               <label class="privacy__checkbox" for="reg-check">
-                <input type="checkbox"  id="reg-check" required />
+                <input type="checkbox" id="reg-check" required />
                 <span class="box"></span>
                 <span>
                   Даю согласие на обработку <a href="">персональных данных</a>
@@ -113,11 +114,16 @@
           <form auth action="">
             <div class="auth__inputs">
               <div class="input__wrapper">
-                <input type="email" id="auth-email" placeholder=" " required/>
+                <input type="email" id="auth-email" placeholder=" " required />
                 <label for="auth-email">Email</label>
               </div>
               <div class="input__wrapper">
-                <input type="password" id="auth-pass" placeholder=" " required/>
+                <input
+                  type="password"
+                  id="auth-pass"
+                  placeholder=" "
+                  required
+                />
                 <label for="auth-pass">Пароль</label>
               </div>
             </div>
@@ -139,9 +145,9 @@
     <main>
       <section class="container section__heading">
         <h1>Новые объявления</h1>
-        <button class="add__ad">
+        <a href="/add.html" class="add__ad">
           <img src="/icons/+.svg" alt="" /><span>Добавить объявление</span>
-        </button>
+        </a>
       </section>
 
       <section class="container ads__grid">
@@ -152,98 +158,98 @@
             <p>Дракон. Рейвен</p>
           </div>
         </a>
-        <a href="#" class="ads__grid__element">
+        <a href="/ad.html" class="ads__grid__element">
           <img src="./images/2.png" alt="" />
           <div>
             <span>4 900 ₽</span>
             <p>Толстовка «Распальцовка»</p>
           </div>
         </a>
-        <a href="#" class="ads__grid__element">
+        <a href="/ad.html" class="ads__grid__element">
           <img src="./images/3.png" alt="" />
           <div>
             <span>12 000 ₽</span>
             <p>Механические часы Победа - ИЛ 2</p>
           </div>
         </a>
-        <a href="#" class="ads__grid__element">
+        <a href="/ad.html" class="ads__grid__element">
           <img src="./images/4.png" alt="" />
           <div>
             <span>79 990 ₽</span>
             <p>iPhone 13 512GB</p>
           </div>
         </a>
-        <a href="#" class="ads__grid__element">
+        <a href="/ad.html" class="ads__grid__element">
           <img src="./images/5.png" alt="" />
           <div>
             <span>67 850 ₽</span>
             <p>ТВ Тумба Дуро</p>
           </div>
         </a>
-        <a href="#" class="ads__grid__element">
+        <a href="/ad.html" class="ads__grid__element">
           <img src="./images/6.png" alt="" />
           <div>
             <span>620 ₽</span>
             <p>Филадельфия манго</p>
           </div>
         </a>
-        <a href="#" class="ads__grid__element">
+        <a href="/ad.html" class="ads__grid__element">
           <img src="./images/7.png" alt="" />
           <div>
             <span>790 ₽</span>
             <p>Свеча «Popcorn»</p>
           </div>
         </a>
-        <a href="#" class="ads__grid__element">
+        <a href="/ad.html" class="ads__grid__element">
           <img src="./images/8.png" alt="" />
           <div>
             <span>1 590 ₽</span>
             <p>Ремешок для ключей Ориноко - рыжий</p>
           </div>
         </a>
-        <a href="#" class="ads__grid__element">
+        <a href="/ad.html" class="ads__grid__element">
           <img src="./images/9.png" alt="" />
           <div>
             <span>1 500 ₽</span>
             <p>Футболка «Это пройдет»</p>
           </div>
         </a>
-        <a href="#" class="ads__grid__element">
+        <a href="/ad.html" class="ads__grid__element">
           <img src="./images/10.png" alt="" />
           <div>
             <span>700 ₽</span>
             <p>Таежная цветущая</p>
           </div>
         </a>
-        <a href="#" class="ads__grid__element">
+        <a href="/ad.html" class="ads__grid__element">
           <img src="./images/11.png" alt="" />
           <div>
             <span>3 590 ₽</span>
             <p>Чехол для AirPods в цвете Lavander</p>
           </div>
         </a>
-        <a href="#" class="ads__grid__element">
+        <a href="/ad.html" class="ads__grid__element">
           <img src="./images/12.png" alt="" />
           <div>
             <span>1 400 ₽</span>
             <p>Футболка «Тот, кому не нужно счастье»</p>
           </div>
         </a>
-        <a href="#" class="ads__grid__element">
+        <a href="/ad.html" class="ads__grid__element">
           <img src="./images/13.png" alt="" />
           <div>
             <span>690 ₽</span>
             <p>Утка на велосипед в шлеме</p>
           </div>
         </a>
-        <a href="#" class="ads__grid__element">
+        <a href="/ad.html" class="ads__grid__element">
           <img src="./images/14.png" alt="" />
           <div>
             <span>7 990 ₽</span>
             <p>Ремешок для AppleWatch из Novonappa</p>
           </div>
         </a>
-        <a href="#" class="ads__grid__element">
+        <a href="/ad.html" class="ads__grid__element">
           <img src="./images/15.png" alt="" />
           <div>
             <span>690 ₽</span>
@@ -264,5 +270,6 @@
 
     <script src="/scripts/popover.js"></script>
     <script src="/scripts/validation.js"></script>
+    <script src="/scripts/applyButtonMock.js"></script>
   </body>
 </html>

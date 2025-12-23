@@ -159,6 +159,10 @@ form [alert] {
   gap: 12px;
   align-items: center;
   justify-content: center;
+}
+
+form[reg] [alert],
+form[auth] [alert] {
   margin-top: 30px;
 }
 
