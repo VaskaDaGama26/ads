@@ -1,7 +1,7 @@
 [popover] {
   background: white;
   border-radius: 8px;
-  padding: 32px;
+  padding: 20px;
   width: min(600px, 88%);
   box-sizing: border-box;
   height: fit-content;
@@ -10,7 +10,68 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+
+  @media (width >= 768px) {
+    padding: 40px;
+  }
 }
 [popover]::backdrop {
-    background: rgba(0, 0, 0, 0.426);
+  background: rgba(0, 0, 0, 0.426);
+}
+
+[command="hide-popover"] {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.top__wrapper {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+
+  @media (width >= 768px) {
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+}
+
+.register__heading,
+.auth__heading {
+  font-size: 20px;
+  font-weight: 500;
+  color: black;
+
+  @media (width >= 768px) {
+    font-size: 32px;
+  }
+}
+
+.register__button,
+.auth__button {
+  font-size: 20px;
+  font-weight: 500;
+  color: #b9b9b9;
+
+  @media (width >= 768px) {
+    font-size: 32px;
+  }
+}
+
+button[type="submit"] {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+
+button[type="submit"][pink] {
+  color: #ffffff;
+  background: #ff006b;
 }

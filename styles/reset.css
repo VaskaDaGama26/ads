@@ -105,9 +105,6 @@ nav,
 section {
   display: block;
 }
-body {
-  line-height: 1;
-}
 ol,
 ul {
   list-style: none;
@@ -133,7 +130,16 @@ button {
   cursor: pointer;
 }
 
-button:focus {
-  outline: 1px solid #000;
-  outline-offset: 2px;
+:focus {
+  outline: 2px solid #ff006a6a;
+  outline-offset: 4px;
+  border-radius: 10px;
+}
+
+body {
+  line-height: 1.25;
+}
+
+a {
+  text-decoration: none;
 }

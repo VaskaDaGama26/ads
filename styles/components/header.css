@@ -30,9 +30,31 @@ header {
   gap: 30px;
   align-items: center;
 
-  button {
+  button[open-popover] {
     font-size: 16px;
     font-weight: 500;
     color: #181818;
+  }
+
+  .hello {
+    display: inline-flex;
+    gap: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #181818;
+
+    span {
+      display: none;
+
+      @media(width >= 768px) {
+        display: block;
+      }
+    }
+  }
+
+  .logout {
+    font-size: 16px;
+    font-weight: 500;
+    color: #989898;
   }
 }

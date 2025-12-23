@@ -8,7 +8,7 @@
   </head>
   <body>
     <header class="container">
-      <div class="logo">
+      <a href="/" class="logo">
         <svg
           width="40"
           height="40"
@@ -30,16 +30,27 @@
           <rect x="7" y="29" width="26" height="4" rx="2" fill="#FF006B" />
         </svg>
         <h1>Объявления</h1>
-      </div>
+      </a>
 
-      <div class="header__buttons">
-        <button commandfor="register" command="show-popover">
+      <!-- <div class="header__buttons">
+        <button open-popover commandfor="register" command="show-popover">
           Регистрация
         </button>
         <div popover id="register">
-          <h2>Регистрация</h2>
-          <button>Авторизация</button>
-          <button commandfor="register" command="hide-popover">x</button>
+          <div class="top__wrapper">
+            <h2 class="register__heading">Регистрация</h2>
+            <button
+              commandfor="auth"
+              command="show-popover"
+              class="auth__button"
+            >
+              Авторизация
+            </button>
+          </div>
+
+          <button commandfor="register" command="hide-popover">
+            <img src="/icons/close.svg" alt="" />
+          </button>
           <form action="">
             <input type="text" placeholder="Ваше имя" />
             <input type="email" name="" id="" placeholder="Email" />
@@ -55,7 +66,7 @@
               <input type="checkbox" name="" id="" />
               Даю согласие на обработку <a href="">персональных данных</a>
             </label>
-            <button>Зарегистрироваться</button>
+            <button pink type="submit">Зарегистрироваться</button>
           </form>
           <div>
             <img src="" alt="" /><span
@@ -63,129 +74,155 @@
             >
           </div>
         </div>
-        <button commandfor="auth" command="show-popover">Вход</button>
+        <button open-popover commandfor="auth" command="show-popover">
+          Вход
+        </button>
         <div popover id="auth">
-          <button commandfor="register" command="show-popover">
-            Регистрация
+          <div class="top__wrapper">
+            <button
+              commandfor="register"
+              command="show-popover"
+              class="register__button"
+            >
+              Регистрация
+            </button>
+            <h2 class="auth__heading">Авторизация</h2>
+          </div>
+          <button commandfor="auth" command="hide-popover">
+            <img src="/icons/close.svg" alt="" />
           </button>
-          <h2>Авторизация</h2>
-          <button commandfor="auth" command="hide-popover">x</button>
           <form action="">
             <input type="email" name="" id="" placeholder="Email" />
             <input type="password" name="" id="" placeholder="Введите пароль" />
-            <button type="submit" disabled>Войти</button>
+            <button pink type="submit" disabled>Войти</button>
           </form>
         </div>
+      </div> -->
+
+      <div class="header__buttons">
+        <p class="hello"><span>Здравствуйте,</span>Константин</p>
+        <button class="logout">Выход</button>
       </div>
     </header>
 
     <main>
+      <section class="container section__heading">
+        <h1>Новые объявления</h1>
+        <button class="add__ad">
+          <img src="/icons/+.svg" alt="" /><span>Добавить объявление</span>
+        </button>
+      </section>
+
       <section class="container ads__grid">
-        <div class="ads__grid__element">
+        <a href="/ad.html" class="ads__grid__element">
           <img src="./images/1.png" alt="" />
           <div>
             <span>3 590 ₽</span>
             <p>Дракон. Рейвен</p>
           </div>
-        </div>
-        <div class="ads__grid__element">
+        </a>
+        <a href="#" class="ads__grid__element">
           <img src="./images/2.png" alt="" />
           <div>
             <span>4 900 ₽</span>
             <p>Толстовка «Распальцовка»</p>
           </div>
-        </div>
-        <div class="ads__grid__element">
+        </a>
+        <a href="#" class="ads__grid__element">
           <img src="./images/3.png" alt="" />
           <div>
             <span>12 000 ₽</span>
             <p>Механические часы Победа - ИЛ 2</p>
           </div>
-        </div>
-        <div class="ads__grid__element">
+        </a>
+        <a href="#" class="ads__grid__element">
           <img src="./images/4.png" alt="" />
           <div>
             <span>79 990 ₽</span>
             <p>iPhone 13 512GB</p>
           </div>
-        </div>
-        <div class="ads__grid__element">
+        </a>
+        <a href="#" class="ads__grid__element">
           <img src="./images/5.png" alt="" />
           <div>
             <span>67 850 ₽</span>
             <p>ТВ Тумба Дуро</p>
           </div>
-        </div>
-        <div class="ads__grid__element">
+        </a>
+        <a href="#" class="ads__grid__element">
           <img src="./images/6.png" alt="" />
           <div>
             <span>620 ₽</span>
             <p>Филадельфия манго</p>
           </div>
-        </div>
-        <div class="ads__grid__element">
+        </a>
+        <a href="#" class="ads__grid__element">
           <img src="./images/7.png" alt="" />
           <div>
             <span>790 ₽</span>
             <p>Свеча «Popcorn»</p>
           </div>
-        </div>
-        <div class="ads__grid__element">
+        </a>
+        <a href="#" class="ads__grid__element">
           <img src="./images/8.png" alt="" />
           <div>
             <span>1 590 ₽</span>
             <p>Ремешок для ключей Ориноко - рыжий</p>
           </div>
-        </div>
-        <div class="ads__grid__element">
+        </a>
+        <a href="#" class="ads__grid__element">
           <img src="./images/9.png" alt="" />
           <div>
             <span>1 500 ₽</span>
             <p>Футболка «Это пройдет»</p>
           </div>
-        </div>
-        <div class="ads__grid__element">
+        </a>
+        <a href="#" class="ads__grid__element">
           <img src="./images/10.png" alt="" />
           <div>
             <span>700 ₽</span>
             <p>Таежная цветущая</p>
           </div>
-        </div>
-        <div class="ads__grid__element">
+        </a>
+        <a href="#" class="ads__grid__element">
           <img src="./images/11.png" alt="" />
           <div>
             <span>3 590 ₽</span>
             <p>Чехол для AirPods в цвете Lavander</p>
           </div>
-        </div>
-        <div class="ads__grid__element">
+        </a>
+        <a href="#" class="ads__grid__element">
           <img src="./images/12.png" alt="" />
           <div>
             <span>1 400 ₽</span>
             <p>Футболка «Тот, кому не нужно счастье»</p>
           </div>
-        </div>
-        <div class="ads__grid__element">
+        </a>
+        <a href="#" class="ads__grid__element">
           <img src="./images/13.png" alt="" />
           <div>
             <span>690 ₽</span>
             <p>Утка на велосипед в шлеме</p>
           </div>
-        </div>
-        <div class="ads__grid__element">
+        </a>
+        <a href="#" class="ads__grid__element">
           <img src="./images/14.png" alt="" />
           <div>
             <span>7 990 ₽</span>
             <p>Ремешок для AppleWatch из Novonappa</p>
           </div>
-        </div>
-        <div class="ads__grid__element">
+        </a>
+        <a href="#" class="ads__grid__element">
           <img src="./images/15.png" alt="" />
           <div>
             <span>690 ₽</span>
             <p>Менажница «Микки» из кедра</p>
           </div>
-        </div>
+        </a>
+
+        <button class="show-more__button">
+          <img src="/icons/show-more.svg" alt="" />Показать еще
+        </button>
       </section>
     </main>
 
@@ -193,5 +230,7 @@
       <a href="mailto:info@gmail.com">info@gmail.com</a>
       <span> Информация о разработчике </span>
     </footer>
+
+    <script src="/scripts/popover.js"></script>
   </body>
 </html>

@@ -1,18 +1,26 @@
+/* Base */
 @import url("./reset.css");
 
 @import url("./components/header.css");
+@import url("./components/popover.css");
+
 @import url("./components/footer.css");
 
 
+/* Main page */
+@import url("./components/heading.css");
 @import url("./components/grid.css");
-@import url("./components/popover.css");
+
+/* Ad */
+@import url("./components/ad.css");
+
 
 html {
   font-family: "Inter", sans-serif;
 }
 
 .container {
-    margin-inline: auto;
+  margin-inline: auto;
   width: 280px;
   @media (width >= 768px) {
     width: 688px;
