@@ -18,8 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btn.getAttribute("command") === "show-popover") {
       closeAll();
       target.showPopover();
+      document.body.style.overflow = 'hidden';
     } else {
       target.hidePopover();
+      document.body.style.overflow = 'auto';
     }
   });
 

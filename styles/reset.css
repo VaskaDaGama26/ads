@@ -130,7 +130,7 @@ button {
   cursor: pointer;
 }
 
-:focus {
+:focus:not(input) {
   outline: 2px solid #ff006a6a;
   outline-offset: 4px;
   border-radius: 10px;

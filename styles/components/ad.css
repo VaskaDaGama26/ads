@@ -50,25 +50,25 @@
     gap: 40px;
   }
 }
-.ad__section [desktop] {
+.ad__main [desktop] {
   display: none;
   @media (width > 1200px) {
     display: flex;
   }
 }
-.ad__section [tablet] {
+.ad__main [tablet] {
   display: flex;
   @media (width > 1200px) {
     display: none;
   }
 }
-.ad__section [mobile] {
+.ad__main [mobile] {
   display: flex;
   @media (width > 768px) {
     display: none;
   }
 }
-.ad__section [non-mobile] {
+.ad__main [non-mobile] {
   display: none;
   @media (width > 768px) {
     display: flex;
