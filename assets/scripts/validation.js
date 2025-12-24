@@ -23,6 +23,13 @@ document.addEventListener("DOMContentLoaded", function () {
       successMessage:
         "Авторизация успешно отправлена! Данные выведены в консоль.",
     },
+    ADD: {
+      selector: "form[add]",
+      id: null,
+      fields: ["add-name", "add-price", "add-desc"],
+      logTitle: "ДАННЫЕ ОБЪЯВЛЕНИЯ",
+      successMessage: "Объявление успешно отправлено!",
+    },
   };
 
   class FormManager {
@@ -47,7 +54,13 @@ document.addEventListener("DOMContentLoaded", function () {
       this.config.fields.forEach((fieldId) => {
         const element = document.getElementById(fieldId);
         if (element) {
-          data[fieldId.replace(`${this.type.toLowerCase()}-`, "")] =
+          let key = fieldId.replace(`${this.type.toLowerCase()}-`, "");
+          if (this.type === "ADD") {
+            if (fieldId === "add-name") key = "name";
+            if (fieldId === "add-price") key = "price";
+            if (fieldId === "add-desc") key = "desc";
+          }
+          data[key] =
             element.type === "checkbox" ? element.checked : element.value;
         }
       });
@@ -141,27 +154,125 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     setupSubmitHandler() {
-      this.form.addEventListener("submit", (e) => {
+      this.form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         if (!this.validate()) return;
 
-        const data = this.collectData();
-        this.logData(data);
-
-        this.clear();
-
-        if (this.popover) {
-          this.popover.hidePopover();
+        if (this.type === "ADD") {
+          await this.handleAddForm();
+          return;
         }
 
-        alert(this.config.successMessage);
+        const data = this.collectData();
+
+        const endpoint =
+          this.type === "REG" ? "/src/register.php" : "/src/login.php";
+
+        console.log("Отправка данных на:", endpoint, data);
+
+        try {
+          const response = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          });
+
+          const responseText = await response.text();
+          console.log("Ответ сервера:", responseText);
+
+          try {
+            const result = JSON.parse(responseText);
+
+            if (result.success) {
+              this.logData(data);
+              this.clear();
+
+              if (this.popover) {
+                this.popover.hidePopover();
+              }
+
+              alert(result.message);
+
+              setTimeout(() => {
+                window.location.reload(true);
+              }, 500);
+            } else {
+              alert(
+                result.errors ? result.errors.join("\n") : "Произошла ошибка"
+              );
+            }
+          } catch (parseError) {
+            console.error("Ошибка парсинга JSON:", responseText);
+            console.error("Ошибка:", parseError);
+            alert(
+              "Сервер вернул некорректный ответ. Проверьте консоль для деталей."
+            );
+          }
+        } catch (error) {
+          console.error("Ошибка сети:", error);
+          alert("Произошла ошибка при отправке данных. Проверьте подключение.");
+        }
       });
+    }
+
+    async handleAddForm() {
+      const data = this.collectData();
+
+      const formData = new FormData();
+      formData.append("title", data.name || "");
+      formData.append("price", data.price || "");
+      formData.append("description", data.desc || "");
+
+      const fileInput = document.getElementById("add-file");
+      if (fileInput && fileInput.files[0]) {
+        formData.append("image", fileInput.files[0]);
+      } else {
+        alert("Пожалуйста, выберите изображение");
+        return;
+      }
+
+      try {
+        const response = await fetch("/src/add_ad.php", {
+          method: "POST",
+          body: formData,
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          alert(result.message);
+
+          this.clear();
+
+          if (result.redirect) {
+            setTimeout(() => {
+              window.location.href = result.redirect;
+            }, 1000);
+          } else {
+            setTimeout(() => {
+              window.location.href = "/";
+            }, 1000);
+          }
+        } else {
+          if (result.errors) {
+            alert(result.errors.join("\n"));
+          } else {
+            alert(result.message || "Произошла ошибка");
+          }
+        }
+      } catch (error) {
+        console.error("Ошибка:", error);
+        alert("Ошибка соединения с сервером");
+      }
     }
   }
 
   const regManager = new FormManager("REG");
   const authManager = new FormManager("AUTH");
+  const addManager = new FormManager("ADD");
 
   document.addEventListener("click", (e) => {
     const isCloseButton = e.target.closest('[command="hide-popover"]');
