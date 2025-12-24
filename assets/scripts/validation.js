@@ -1,4 +1,63 @@
 document.addEventListener("DOMContentLoaded", function () {
+  function initPhoneMask() {
+    const phoneInputs = document.querySelectorAll('input[type="tel"]');
+
+    phoneInputs.forEach((input) => {
+      input.addEventListener("input", function (e) {
+        this.value = this.value.replace(/[^\d+\s-]/g, "");
+
+        let value = this.value.replace(/\D/g, "");
+
+        if (value.length === 0) {
+          this.value = "+7 ";
+          return;
+        }
+
+        if (value.length > 11) {
+          value = value.substring(0, 11);
+        }
+
+        let formatted = "+7 ";
+        if (value.length > 1) {
+          formatted += value.substring(1, 4);
+        }
+        if (value.length >= 5) {
+          formatted += "-" + value.substring(4, 7);
+        }
+        if (value.length >= 8) {
+          formatted += "-" + value.substring(7, 9);
+        }
+        if (value.length >= 10) {
+          formatted += "-" + value.substring(9, 11);
+        }
+
+        this.value = formatted;
+      });
+
+      input.addEventListener("focus", function () {
+        if (this.value === "+7 ") {
+          this.value = "";
+        }
+      });
+
+      input.addEventListener("blur", function () {
+        if (this.value === "") {
+          this.value = "+7 ";
+        }
+      });
+    });
+  }
+
+  function validatePhone(phone) {
+    const re = /^\+7\s\d{3}-\d{3}-\d{2}-\d{2}$/;
+    return re.test(phone);
+  }
+
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
   const Forms = {
     REG: {
       selector: "form[reg]",
@@ -12,16 +71,14 @@ document.addEventListener("DOMContentLoaded", function () {
         "reg-check",
       ],
       logTitle: "ДАННЫЕ РЕГИСТРАЦИИ",
-      successMessage:
-        "Регистрация успешно отправлена! Данные выведены в консоль.",
+      successMessage: "Регистрация успешно отправлена!",
     },
     AUTH: {
       selector: "form[auth]",
       id: "auth",
       fields: ["auth-email", "auth-pass"],
       logTitle: "ДАННЫЕ АВТОРИЗАЦИИ",
-      successMessage:
-        "Авторизация успешно отправлена! Данные выведены в консоль.",
+      successMessage: "Авторизация успешно отправлена!",
     },
     ADD: {
       selector: "form[add]",
@@ -45,8 +102,18 @@ document.addEventListener("DOMContentLoaded", function () {
     init() {
       if (!this.form) return;
 
+      this.setupMasks();
       this.setupValidation();
       this.setupSubmitHandler();
+    }
+
+    setupMasks() {
+      if (this.type === "REG") {
+        const phoneInput = document.getElementById("reg-tel");
+        if (phoneInput) {
+          initPhoneMask();
+        }
+      }
     }
 
     collectData() {
@@ -75,8 +142,8 @@ document.addEventListener("DOMContentLoaded", function () {
             element.checked = false;
           } else {
             element.value = "";
+            element.style.borderColor = "";
           }
-          element.style.borderColor = "";
         }
       });
       this.validate();
@@ -89,8 +156,26 @@ document.addEventListener("DOMContentLoaded", function () {
       let allValid = true;
 
       requiredInputs.forEach((input) => {
-        const isValid =
+        let isValid =
           input.type === "checkbox" ? input.checked : input.value.trim() !== "";
+
+        if (input.type === "email" && input.value.trim() !== "") {
+          if (!validateEmail(input.value)) {
+            isValid = false;
+            input.style.borderColor = "#ff4444";
+          } else {
+            input.style.borderColor = "";
+          }
+        }
+
+        if (input.type === "tel" && input.value.trim() !== "") {
+          if (!validatePhone(input.value)) {
+            isValid = false;
+            input.style.borderColor = "#ff4444";
+          } else {
+            input.style.borderColor = "";
+          }
+        }
 
         if (!isValid) allValid = false;
 
@@ -165,6 +250,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const data = this.collectData();
+
+        if (this.type === "REG" && data.tel) {
+          const phoneDigits = data.tel.replace(/\D/g, "");
+          if (phoneDigits.length !== 11) {
+            alert("Пожалуйста, введите корректный номер телефона (11 цифр)");
+            return;
+          }
+
+          if (!phoneDigits.startsWith("7")) {
+            alert("Номер телефона должен начинаться с 7");
+            return;
+          }
+
+          data.tel = phoneDigits;
+        }
 
         const endpoint =
           this.type === "REG" ? "/src/register.php" : "/src/login.php";
@@ -269,6 +369,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   }
+
+  initPhoneMask();
 
   const regManager = new FormManager("REG");
   const authManager = new FormManager("AUTH");

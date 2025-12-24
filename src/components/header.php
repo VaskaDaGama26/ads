@@ -58,8 +58,12 @@ $logged_in = isLoggedIn(); ?>
                             <label for="auth-email">Email</label>
                         </div>
                         <div class="input__wrapper">
-                            <input type="tel" id="reg-tel" placeholder=" " required />
-                            <label for="auth-email">Телефон</label>
+                            <input
+                                type="tel"
+                                id="reg-tel"
+                                placeholder=" "
+                                required />
+                            <label for="reg-tel">Телефон</label>
                         </div>
                         <div class="input__wrapper">
                             <input type="password" id="reg-pass" placeholder=" " required />
@@ -133,7 +137,7 @@ $logged_in = isLoggedIn(); ?>
     <?php else: ?>
         <div class="header__buttons">
             <p class="hello"><span>Здравствуйте,</span><?php echo htmlspecialchars($_SESSION['user_name']); ?></p>
-            <button class="logout">Выход</button>
+            <button class="logout" id="logout-btn">Выход</button>
         </div>
     <?php endif; ?>
 </header>

@@ -7,15 +7,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $name = trim($data['name'] ?? '');
     $email = trim($data['email'] ?? '');
-    $phone = trim($data['tel'] ?? '');
     $password = $data['pass'] ?? '';
     $password_repeat = $data['pass-repeat'] ?? '';
+    $phone = trim($data['tel'] ?? '');
 
     $errors = [];
 
+    if (empty($phone)) {
+        $errors[] = 'Телефон обязателен';
+    } else {
+        $phone_digits = preg_replace('/[^0-9]/', '', $phone);
+
+        if (strlen($phone_digits) !== 11) {
+            $errors[] = 'Некорректный телефон. Должно быть 11 цифр';
+        } else {
+            if (substr($phone_digits, 0, 1) === '8') {
+                $phone_digits = '7' . substr($phone_digits, 1);
+            }
+            if (substr($phone_digits, 0, 1) !== '7') {
+                $phone_digits = '7' . $phone_digits;
+            }
+            $phone = $phone_digits;
+        }
+    }
+
     if (empty($name)) $errors[] = 'Имя обязательно';
     if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'Некорректный email';
-    if (empty($phone) || !preg_match('/^\+?[0-9]{10,12}$/', $phone)) $errors[] = 'Некорректный телефон';
     if (empty($password) || strlen($password) < 6) $errors[] = 'Пароль должен быть не менее 6 символов';
     if ($password !== $password_repeat) $errors[] = 'Пароли не совпадают';
 

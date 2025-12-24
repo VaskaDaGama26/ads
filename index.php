@@ -1,16 +1,20 @@
 <?php
 
 require __DIR__ . '/src/db.php';
-
 require_once __DIR__ . '/src/config.php';
 $logged_in = isLoggedIn();
 
+// Получаем все объявления
 $stmt = $pdo->query("
-                SELECT id, title, price, description, image
-                from Ads
-                ORDER BY id DESC
-              ");
-$ads = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    SELECT id, title, price, description, image
+    FROM Ads
+    ORDER BY id DESC
+");
+$all_ads = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$visible_ads = array_slice($all_ads, 0, 10);
+$hidden_ads = array_slice($all_ads, 10);
+$has_more_ads = count($all_ads) > 10;
 
 ?>
 
@@ -21,7 +25,7 @@ $ads = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/assets/styles/style.css" />
-  <title>Обьявления - Вариант 5</title>
+  <title>Объявления</title>
 </head>
 
 <body>
@@ -36,11 +40,13 @@ $ads = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </section>
 
     <section class="container ads__grid">
-      <?php if (empty($ads)): ?>
-        <p>Нет объявлений</p>
+      <?php if (empty($all_ads)): ?>
+        <p style="grid-column: 1 / -1; text-align: center; color: #666;">
+          Нет объявлений. Будьте первым, кто добавит объявление!
+        </p>
       <?php endif; ?>
 
-      <?php foreach ($ads as $ad): ?>
+      <?php foreach ($visible_ads as $ad): ?>
         <?php
         $id = htmlspecialchars($ad['id']);
         $title = htmlspecialchars($ad['title']);
@@ -48,7 +54,7 @@ $ads = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $image = base64_encode($ad['image']);
         ?>
         <a href="/ad/<?= $id ?>" class="ads__grid__element">
-          <img src="data:image/jpeg;base64,<?= $image ?>" alt="" />
+          <img src="data:image/jpeg;base64,<?= $image ?>" alt="<?= $title ?>" />
           <div>
             <span><?= $price ?> ₽</span>
             <p><?= $title ?></p>
@@ -56,9 +62,28 @@ $ads = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </a>
       <?php endforeach; ?>
 
-      <!-- <button class="show-more__button">
-        <img src="/assets/icons/show-more.svg" alt="" />Показать еще
-      </button> -->
+      <?php foreach ($hidden_ads as $index => $ad): ?>
+        <?php
+        $id = htmlspecialchars($ad['id']);
+        $title = htmlspecialchars($ad['title']);
+        $price = number_format($ad['price'], 0, '.', ' ');
+        $image = base64_encode($ad['image']);
+        ?>
+        <a href="/ad/<?= $id ?>" class="ads__grid__element hidden"
+          data-ad-index="<?= $index + 10 ?>">
+          <img src="data:image/jpeg;base64,<?= $image ?>" alt="<?= $title ?>" />
+          <div>
+            <span><?= $price ?> ₽</span>
+            <p><?= $title ?></p>
+          </div>
+        </a>
+      <?php endforeach; ?>
+
+      <?php if ($has_more_ads): ?>
+        <button class="show-more__button" id="showMoreBtn">
+          <img src="/assets/icons/show-more.svg" alt="" />Показать еще
+        </button>
+      <?php endif; ?>
     </section>
   </main>
 
@@ -67,6 +92,8 @@ $ads = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <script src="/assets/scripts/checkAuthStatus.js"></script>
   <script src="/assets/scripts/popover.js"></script>
   <script src="/assets/scripts/validation.js"></script>
+
+  <script src="/assets/scripts/showMore.js"></script>
 </body>
 
 </html>
